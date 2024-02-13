@@ -1,8 +1,10 @@
 part of 'create_child_bloc.dart';
 
 sealed class CreateChildEvent extends Equatable {
-  const CreateChildEvent();
 
   @override
   List<Object> get props => [];
 }
+
+final class CreatingChild extends CreateChildEvent{}
+final class ChildAdded extends CreateChildEvent{}

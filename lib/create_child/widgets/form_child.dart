@@ -4,7 +4,7 @@ import 'package:my_child_screen/data/local_db.dart';
 class FormChild extends StatelessWidget {
   const FormChild({required this.child, super.key});
 
-  final ChildListDataBaseCompanion child;
+  final ChildrenCompanion child;
 
   @override
   Widget build(BuildContext context) {

@@ -7,4 +7,10 @@ sealed class CreateChildEvent extends Equatable {
 
 final class FormChild extends CreateChildEvent {}
 
-final class ChildAdded extends CreateChildEvent {}
+class ChildAdded extends CreateChildEvent {
+  final String name;
+
+  ChildAdded({
+    required this.name,
+  });
+}

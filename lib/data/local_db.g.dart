@@ -3,12 +3,12 @@
 part of 'local_db.dart';
 
 // ignore_for_file: type=lint
-class $ChildListDataBaseTable extends ChildListDataBase
-    with TableInfo<$ChildListDataBaseTable, ChildListDataBaseData> {
+class $ChildrenTable extends Children
+    with TableInfo<$ChildrenTable, ChildrenData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $ChildListDataBaseTable(this.attachedDatabase, [this._alias]);
+  $ChildrenTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -46,10 +46,9 @@ class $ChildListDataBaseTable extends ChildListDataBase
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'child_list_data_base';
+  static const String $name = 'children';
   @override
-  VerificationContext validateIntegrity(
-      Insertable<ChildListDataBaseData> instance,
+  VerificationContext validateIntegrity(Insertable<ChildrenData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -82,9 +81,9 @@ class $ChildListDataBaseTable extends ChildListDataBase
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  ChildListDataBaseData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  ChildrenData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return ChildListDataBaseData(
+    return ChildrenData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       name: attachedDatabase.typeMapping
@@ -97,18 +96,17 @@ class $ChildListDataBaseTable extends ChildListDataBase
   }
 
   @override
-  $ChildListDataBaseTable createAlias(String alias) {
-    return $ChildListDataBaseTable(attachedDatabase, alias);
+  $ChildrenTable createAlias(String alias) {
+    return $ChildrenTable(attachedDatabase, alias);
   }
 }
 
-class ChildListDataBaseData extends DataClass
-    implements Insertable<ChildListDataBaseData> {
+class ChildrenData extends DataClass implements Insertable<ChildrenData> {
   final int id;
   final String name;
   final DateTime childDateTime;
   final bool gender;
-  const ChildListDataBaseData(
+  const ChildrenData(
       {required this.id,
       required this.name,
       required this.childDateTime,
@@ -123,8 +121,8 @@ class ChildListDataBaseData extends DataClass
     return map;
   }
 
-  ChildListDataBaseCompanion toCompanion(bool nullToAbsent) {
-    return ChildListDataBaseCompanion(
+  ChildrenCompanion toCompanion(bool nullToAbsent) {
+    return ChildrenCompanion(
       id: Value(id),
       name: Value(name),
       childDateTime: Value(childDateTime),
@@ -132,10 +130,10 @@ class ChildListDataBaseData extends DataClass
     );
   }
 
-  factory ChildListDataBaseData.fromJson(Map<String, dynamic> json,
+  factory ChildrenData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return ChildListDataBaseData(
+    return ChildrenData(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       childDateTime: serializer.fromJson<DateTime>(json['childDateTime']),
@@ -153,9 +151,9 @@ class ChildListDataBaseData extends DataClass
     };
   }
 
-  ChildListDataBaseData copyWith(
+  ChildrenData copyWith(
           {int? id, String? name, DateTime? childDateTime, bool? gender}) =>
-      ChildListDataBaseData(
+      ChildrenData(
         id: id ?? this.id,
         name: name ?? this.name,
         childDateTime: childDateTime ?? this.childDateTime,
@@ -163,7 +161,7 @@ class ChildListDataBaseData extends DataClass
       );
   @override
   String toString() {
-    return (StringBuffer('ChildListDataBaseData(')
+    return (StringBuffer('ChildrenData(')
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('childDateTime: $childDateTime, ')
@@ -177,26 +175,25 @@ class ChildListDataBaseData extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is ChildListDataBaseData &&
+      (other is ChildrenData &&
           other.id == this.id &&
           other.name == this.name &&
           other.childDateTime == this.childDateTime &&
           other.gender == this.gender);
 }
 
-class ChildListDataBaseCompanion
-    extends UpdateCompanion<ChildListDataBaseData> {
+class ChildrenCompanion extends UpdateCompanion<ChildrenData> {
   final Value<int> id;
   final Value<String> name;
   final Value<DateTime> childDateTime;
   final Value<bool> gender;
-  const ChildListDataBaseCompanion({
+  const ChildrenCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.childDateTime = const Value.absent(),
     this.gender = const Value.absent(),
   });
-  ChildListDataBaseCompanion.insert({
+  ChildrenCompanion.insert({
     this.id = const Value.absent(),
     required String name,
     required DateTime childDateTime,
@@ -204,7 +201,7 @@ class ChildListDataBaseCompanion
   })  : name = Value(name),
         childDateTime = Value(childDateTime),
         gender = Value(gender);
-  static Insertable<ChildListDataBaseData> custom({
+  static Insertable<ChildrenData> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<DateTime>? childDateTime,
@@ -218,12 +215,12 @@ class ChildListDataBaseCompanion
     });
   }
 
-  ChildListDataBaseCompanion copyWith(
+  ChildrenCompanion copyWith(
       {Value<int>? id,
       Value<String>? name,
       Value<DateTime>? childDateTime,
       Value<bool>? gender}) {
-    return ChildListDataBaseCompanion(
+    return ChildrenCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       childDateTime: childDateTime ?? this.childDateTime,
@@ -251,7 +248,7 @@ class ChildListDataBaseCompanion
 
   @override
   String toString() {
-    return (StringBuffer('ChildListDataBaseCompanion(')
+    return (StringBuffer('ChildrenCompanion(')
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('childDateTime: $childDateTime, ')
@@ -263,11 +260,10 @@ class ChildListDataBaseCompanion
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
-  late final $ChildListDataBaseTable childListDataBase =
-      $ChildListDataBaseTable(this);
+  late final $ChildrenTable children = $ChildrenTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [childListDataBase];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [children];
 }

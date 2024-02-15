@@ -24,9 +24,39 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   int get schemaVersion => 1;
+<<<<<<< Updated upstream
 
   Future<List<ChildModel>?> getChildren() async {
     final children = await select(childListDataBase).get();
+=======
+  Future<void> testInsert() async {
+    await into(children).insert(ChildrenCompanion.insert(
+        name: '${DateTime.now().hashCode}',
+        childDateTime: DateTime.now(),
+        gender: true));
+    d.log('ITS FROM @DRIFTDatabase class ');
+    List<ChildModel> childrens = await getChildren();
+    d.log(childrens.toString(), name: 'ELEMENTS FROM Database getChildren: ');
+  }
+
+  Future<int> insertChild(ChildrenCompanion childrenCompanion) async {
+    late int result;
+    try {
+      result = await into(children).insert(childrenCompanion);
+    } catch (result) {
+      d.log(result.toString(), name: 'Inserted child');
+    }
+    return result;
+  }
+
+  Future<List<ChildModel>> getChildren() async {
+    List<ChildrenData> children = [];
+    try {
+      children = await select(database.children).get();
+    } catch (e) {
+      log('$e' as num);
+    }
+>>>>>>> Stashed changes
 
     List<ChildModel> result = [];
     for (var child in children) {
@@ -34,6 +64,41 @@ class AppDatabase extends _$AppDatabase {
     }
     return result;
   }
+<<<<<<< Updated upstream
+=======
+
+  // Future<ChildModel?> getChild(int id) async {
+  //   late Children child;
+  //   try {
+  //     child = await (select(Children)
+  //           ..where((tbl) => tbl.id.equals(id)))
+  //         .getSingle();
+  //   } catch (e) {
+  //     log('$e' as num);
+  //   }
+  //   return ChildModel.fromLocal(child);
+  // }
+
+  // Future<bool> updateChild(ChildListDataBaseCompanion child) async {
+  //   late bool flag;
+  //   try {
+  //     flag = await update(Children).replace(child);
+  //   } catch (e) {
+  //     log('$e' as num);
+  //   }
+  //   if (flag == true) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+//TODO Пока оставить делит ол так как сложная логика будет для статистики
+
+  Future<int> deleteAll() {
+    final result = delete(children).go();
+    return result;
+  }
+>>>>>>> Stashed changes
 }
 
 LazyDatabase _openConnection() {

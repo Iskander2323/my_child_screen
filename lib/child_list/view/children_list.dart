@@ -1,13 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_child_screen/child_list/bloc/children_bloc.dart';
 import 'package:my_child_screen/child_list/widgets/bottom_loader.dart';
 import 'package:my_child_screen/child_list/widgets/children_list_item.dart';
-<<<<<<< Updated upstream
-=======
 import 'package:my_child_screen/repository/children_repository.dart';
 import 'package:routemaster/routemaster.dart' as routemaster;
->>>>>>> Stashed changes
 
 class ChildrenList extends StatefulWidget {
   const ChildrenList({super.key});
@@ -17,26 +16,19 @@ class ChildrenList extends StatefulWidget {
 }
 
 class _ChildrenListState extends State<ChildrenList> {
+  @override
+  void initState() {
+    super.initState();
+   context.read<ChildBloc>().childrenRepository.insertStream.listen((inserted) {
+    log('This context childrepository updated');
+    
+      // context.read<ChildBloc>().add(InitStateFetchedData());
   
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ChildBloc, ChildState>(builder: (context, state) {
-<<<<<<< Updated upstream
-      switch (state.status) {
-        case ChildStatus.failure:
-          return const Center(child: Text('failed to load children'));
-        case ChildStatus.success:
-          return ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-            return index >= state.children.length
-                ? const BottomLoader()
-                : ChildrenListItem(children: state.children[index]);
-          });
-
-        case ChildStatus.initial:
-          return const Center(child: CircularProgressIndicator());
-      }
-=======
       switch(state.status){
         case ChildStatus.failure:
           return ListView.builder(
@@ -87,7 +79,6 @@ class _ChildrenListState extends State<ChildrenList> {
            case ChildStatus.initial:
            return const BottomLoader();
         } 
->>>>>>> Stashed changes
     });
   }
 }

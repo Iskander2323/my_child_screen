@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
+
 
 import 'package:my_child_screen/child_list/model/child_model.dart';
 import 'package:my_child_screen/data/globals.dart';
@@ -11,9 +11,9 @@ class ChildrenRepository {
 
   Stream<bool> get insertStream => _insertStreamController.stream;
 
-  Future<void> insertChild(String name) async {
+  Future<void> insertChild(ChildModel child) async {
     ChildrenCompanion childrenCompanion =
-        ChildModel(name: name, childDateTime: DateTime.now(), gender: true)
+        ChildModel(name: child.name, childDateTime: DateTime.now(), gender: true, id: 10)
             .childModeloChildrenCompanion();
     database.insertChild(childrenCompanion);
     _insertStreamController.add(true);
@@ -25,12 +25,7 @@ class ChildrenRepository {
 
   Future<List<ChildModel>> getChildren() async {
     final children = await database.getChildren();
-    log(children.toString(),
-        name: 'ChildrenRepository getChildren in INITSTate');
     return children;
   }
 
-   Future<void> createTestChild() async {
-    database.testInsert();
-  }
 }

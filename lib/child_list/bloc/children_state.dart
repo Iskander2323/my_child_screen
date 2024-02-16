@@ -2,19 +2,20 @@ part of 'children_bloc.dart';
 
 enum ChildStatus { initial, success, failure }
 
-final class ChildState extends Equatable {
-  const ChildState(
+final class ChildrenState extends Equatable {
+  const ChildrenState(
       {this.status = ChildStatus.initial,
       this.children = const <ChildModel?>[]});
 
   final ChildStatus status;
   final List<ChildModel?> children;
+ 
 
-  ChildState copyWith({
+  ChildrenState copyWith({
     ChildStatus? status,
     List<ChildModel>? children,
   }) {
-    return ChildState(
+    return ChildrenState(
         status: status ?? this.status, children: children ?? this.children);
   }
 
@@ -24,5 +25,5 @@ final class ChildState extends Equatable {
   }
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [status, children];
 }

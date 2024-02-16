@@ -1,14 +1,14 @@
 part of 'children_bloc.dart';
 
-sealed class ChildEvent extends Equatable {
+sealed class ChildrenEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
 
-final class ChildFetched extends ChildEvent {}
+final class ChildrenFetched extends ChildrenEvent {}
 
-class ChildFormOpen extends ChildEvent{}
+class ChildFormOpen extends ChildrenEvent{}
 
-class DeleteAll extends ChildEvent{}
+class DeleteAll extends ChildrenEvent{}
 
-class Updated extends ChildEvent{}
+class EditChild extends ChildrenEvent{}

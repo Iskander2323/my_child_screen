@@ -1,8 +1,6 @@
 import "dart:io";
 import "dart:math";
 
-import 'dart:developer' as d;
-
 import "package:drift/drift.dart";
 import "package:drift/native.dart";
 import "package:my_child_screen/child_list/model/child_model.dart";
@@ -29,16 +27,6 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
-  Future<void> testInsert() async {
-    await into(children).insert(ChildrenCompanion.insert(
-        name: '${DateTime.now().hashCode}',
-        childDateTime: DateTime.now(),
-        gender: true));
-    d.log('ITS FROM @DRIFTDatabase class ');
-    List<ChildModel> childrens = await getChildren();
-    d.log(childrens.toString(), name: 'ELEMENTS FROM Database getChildren: ');
-  }
-
   Future<int> insertChild(ChildrenCompanion childrenCompanion) async {
     late int result;
     try {
@@ -56,6 +44,7 @@ class AppDatabase extends _$AppDatabase {
     } catch (e) {
       log('$e' as num);
     }
+    
 
     List<ChildModel> result = [];
     for (var child in children) {
@@ -71,7 +60,7 @@ class AppDatabase extends _$AppDatabase {
   // Future<ChildModel?> getChild(int id) async {
   //   late Children child;
   //   try {
-  //     child = await (select(Children)
+  //     child = await (select(children)
   //           ..where((tbl) => tbl.id.equals(id)))
   //         .getSingle();
   //   } catch (e) {
@@ -80,19 +69,15 @@ class AppDatabase extends _$AppDatabase {
   //   return ChildModel.fromLocal(child);
   // }
 
-  // Future<bool> updateChild(ChildListDataBaseCompanion child) async {
-  //   late bool flag;
-  //   try {
-  //     flag = await update(Children).replace(child);
-  //   } catch (e) {
-  //     log('$e' as num);
-  //   }
-  //   if (flag == true) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  Future<bool> updateChild(ChildrenCompanion child) async {
+    late bool flag;
+    try {
+      flag = await update(children).replace(child);
+    } catch (e) {
+      log('$e' as num);
+    }
+    return flag;
+  }
 
 //TODO Пока оставить делит ол так как сложная логика будет для статистики
   

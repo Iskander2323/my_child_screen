@@ -8,9 +8,17 @@ sealed class ChildFormEvent extends Equatable {
 final class FormChild extends ChildFormEvent {}
 
 class ChildAdded extends ChildFormEvent {
-  final String name;
+  
+}
 
-  ChildAdded({
+class SavedButtonPressed extends ChildFormEvent{
+final String name;
+final DateTime dateTime;
+final bool gender;
+
+  SavedButtonPressed({
     required this.name,
+    required this.dateTime,
+    required this.gender,
   });
 }

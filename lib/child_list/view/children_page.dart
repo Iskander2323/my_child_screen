@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:my_child_screen/child_list/bloc/children_bloc.dart';
@@ -16,11 +15,10 @@ class ChildrenPage extends StatefulWidget {
 class _ChildrenPageState extends State<ChildrenPage> {
   @override
   Widget build(BuildContext context) {
-    log(context.read<ChildrenRepository>().hashCode.toString(), name: 'PERED OTRISOVKI CHILD LIST');
     return Scaffold(
       body: BlocProvider(
         create: (context) =>
-            ChildBloc(context.read<ChildrenRepository>())..add(ChildFetched()),
+            ChildrenBloc(context.read<ChildrenRepository>())..add(ChildrenFetched()),
         child:  ChildrenList(childrenRepository: context.read<ChildrenRepository>()),
         )
       );

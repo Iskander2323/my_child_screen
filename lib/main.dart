@@ -13,6 +13,5 @@ void main() async {
 
   Bloc.observer = const SimpleBlocObserver();
   final childrenRepository = ChildrenRepository();
-  log(childrenRepository.hashCode.toString(),name: 'THIS REPO CAME FROM MAIN');
   runApp(startApp(childrenRepository));
 }

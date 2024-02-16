@@ -64,6 +64,10 @@ class AppDatabase extends _$AppDatabase {
     return result;
   }
 
+  Future<void> deleteAll() async {
+    await delete(children).go();
+  }
+
   // Future<ChildModel?> getChild(int id) async {
   //   late Children child;
   //   try {
@@ -90,13 +94,8 @@ class AppDatabase extends _$AppDatabase {
   //   }
   // }
 
-  // Future<int> deleteChild(int id) async {
-  //   late int result;
-  //   try{//TODO Пока оставить делит ол так как сложная логика будет для статистики
-  //     result = await (delete(childListDataBase)..where((tbl) => tbl.id.equals));
-  //   }
-  //   return;
-  // }
+//TODO Пока оставить делит ол так как сложная логика будет для статистики
+  
 }
 
 LazyDatabase _openConnection() {

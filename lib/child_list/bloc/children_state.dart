@@ -20,7 +20,7 @@ final class ChildState extends Equatable {
 
   @override
   String toString() {
-    return '''ChildState { status: $status, posts: ${children.length} }''';
+    return '''ChildState { status: $status, children: ${children.length} }''';
   }
 
   @override

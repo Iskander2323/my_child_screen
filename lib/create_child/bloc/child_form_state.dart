@@ -1,17 +1,17 @@
-part of 'create_child_bloc.dart';
+part of 'child_form_bloc.dart';
 
-enum CreateChildStatus { initial, edit, success, failure }
+enum ChildFormStatus { initial, edit, success, failure }
 
 final class CreateChildState extends Equatable {
   const CreateChildState({
-    this.status = CreateChildStatus.initial,
+    this.status = ChildFormStatus.initial,
     this.child = const ChildrenCompanion(),
   });
 
-  final CreateChildStatus status;
+  final ChildFormStatus status;
   final ChildrenCompanion child;
   CreateChildState copyWith({
-    required CreateChildStatus status,
+    required ChildFormStatus status,
   }) {
     return CreateChildState(
       status: status,

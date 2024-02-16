@@ -8,3 +8,7 @@ sealed class ChildEvent extends Equatable {
 final class ChildFetched extends ChildEvent {}
 
 class ChildFormOpen extends ChildEvent{}
+
+class DeleteAll extends ChildEvent{}
+
+class Updated extends ChildEvent{}

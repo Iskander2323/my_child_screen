@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:my_child_screen/app.dart';
@@ -11,5 +13,6 @@ void main() async {
 
   Bloc.observer = const SimpleBlocObserver();
   final childrenRepository = ChildrenRepository();
+  log(childrenRepository.hashCode.toString(),name: 'THIS REPO CAME FROM MAIN');
   runApp(startApp(childrenRepository));
 }

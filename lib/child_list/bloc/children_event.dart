@@ -6,3 +6,9 @@ sealed class ChildEvent extends Equatable {
 }
 
 final class ChildFetched extends ChildEvent {}
+<<<<<<< Updated upstream
+=======
+
+class ChildFormOpen extends ChildEvent{}
+class InitStateFetchedData extends ChildEvent{}
+>>>>>>> Stashed changes

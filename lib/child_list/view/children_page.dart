@@ -11,7 +11,7 @@ class ChildrenPage extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (context) =>
-            ChildBloc(context.read<ChildrenRepository>())..add(ChildFetched()),
+            ChildBloc(childrenRepository: context.read<ChildrenRepository>())..add(ChildFetched()),
         child: const ChildrenList(),
       ),
     );

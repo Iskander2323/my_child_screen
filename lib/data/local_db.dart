@@ -1,5 +1,5 @@
 import "dart:io";
-import "dart:math";
+import 'dart:developer';
 
 import "package:drift/drift.dart";
 import "package:drift/native.dart";
@@ -32,7 +32,7 @@ class AppDatabase extends _$AppDatabase {
     try {
       result = await into(children).insert(childrenCompanion);
     } catch (e) {
-      log('$e' as num);
+      log(e.toString(), name: "FROM LOCALDB INSERT CHILD");
     }
     return result;
   }
@@ -42,10 +42,9 @@ class AppDatabase extends _$AppDatabase {
     try {
       children = await select(database.children).get();
     } catch (e) {
-      log('$e' as num);
+      log(e.toString(), name: "FROM LOCALDB GET CHILDREN");
     }
     
-
     List<ChildModel> result = [];
     for (var child in children) {
       result.add(ChildModel.fromLocal(child));
@@ -57,26 +56,33 @@ class AppDatabase extends _$AppDatabase {
     await delete(children).go();
   }
 
-  // Future<ChildModel?> getChild(int id) async {
-  //   late Children child;
-  //   try {
-  //     child = await (select(children)
-  //           ..where((tbl) => tbl.id.equals(id)))
-  //         .getSingle();
-  //   } catch (e) {
-  //     log('$e' as num);
-  //   }
-  //   return ChildModel.fromLocal(child);
-  // }
-
-  Future<bool> updateChild(ChildrenCompanion child) async {
-    late bool flag;
+  Future<ChildModel> getChildById(int id) async {
+    late ChildrenData child;
     try {
-      flag = await update(children).replace(child);
+      child = await (select(children)
+            ..where((tbl) => tbl.id.equals(id)))
+          .getSingle();
     } catch (e) {
-      log('$e' as num);
+      log(e.toString(), name: "FROM LOCALDB FET CHILD BY ID");
     }
-    return flag;
+    return ChildModel.fromLocal(child);
+  
+  }
+
+  Future<void> updateChild(ChildModel child) async {
+    try{
+    await (update(children)
+    ..where((tbl) => tbl.id.equals(child.id))).write(
+      ChildrenCompanion(
+        name: Value(child.name),
+        childDateTime: Value(child.childDateTime),
+        gender: Value(child.gender)
+      )
+    );
+    }catch(e){
+      log(e.toString(), name: "FROM UPDATE CHILD");
+    }
+   
   }
 
 //TODO Пока оставить делит ол так как сложная логика будет для статистики

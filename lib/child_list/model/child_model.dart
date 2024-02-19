@@ -4,7 +4,7 @@ import 'package:my_child_screen/data/local_db.dart';
 
 class ChildModel extends Equatable {
   const ChildModel(
-      {required this.id, required this.name, required this.childDateTime, required this.gender});
+      { required this.id, required this.name, required this.childDateTime, required this.gender});
 
   ChildModel.fromLocal(ChildrenData data)
       : id = data.id,
@@ -16,13 +16,18 @@ class ChildModel extends Equatable {
   final DateTime childDateTime;
   final bool gender;
 
+  ChildModel.defaultModel(): id = 0,
+      name = '',
+      childDateTime = DateTime.now(),
+      gender = true;
+
   ChildrenCompanion childModeloChildrenCompanion() {
-    final idChildrenCompanion = Value(id);
+   // final idChildrenCompanion = Value(id);
     final nameChildrenCompanion = Value<String>(name);
-    final birthDay = Value<DateTime>(DateTime.now());
+    final birthDay = Value<DateTime>(childDateTime!);
     final genderCompanion = Value<bool>(gender);
     return ChildrenCompanion(
-        id: idChildrenCompanion,
+//id: idChildrenCompanion,
         name: nameChildrenCompanion,
         childDateTime: birthDay,
         gender: genderCompanion,
@@ -32,7 +37,7 @@ class ChildModel extends Equatable {
   @override
   // TODO: implement props
   List<Object?> get props => [
-        id,
+     //   id,
         name,
         childDateTime,
         gender,

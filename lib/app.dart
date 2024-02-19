@@ -9,7 +9,12 @@ import 'package:routemaster/routemaster.dart';
 final routes = RouteMap(
   routes: {
     '/': (_) => const MaterialPage(child: ChildrenPage()),
-    '/add': (_) => const MaterialPage(child: ChildFormPage())
+    '/add/': (_) => const MaterialPage(child: ChildFormPage()),
+    '/add/:id': (routeData) {
+        final id = routeData.pathParameters['id'] ?? '';
+
+        return MaterialPage(child: ChildFormPage(id: id));
+    },
   },
 );
 

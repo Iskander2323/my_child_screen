@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 
 import 'package:my_child_screen/child_list/model/child_model.dart';
@@ -11,12 +12,27 @@ class ChildrenRepository {
 
   Stream<bool> get insertStream => _insertStreamController.stream;
 
-  Future<void> insertChild(ChildModel child) async {
-    ChildrenCompanion childrenCompanion =
-        ChildModel(name: child.name, childDateTime: DateTime.now(), gender: true, id: 10)
+  Future<void> saveOrUpdateChild(ChildModel child) async {
+    if(child.id == 0){
+      ChildrenCompanion childrenCompanion =
+        ChildModel(id: child.id, name: child.name, childDateTime: child.childDateTime, gender: child.gender)
             .childModeloChildrenCompanion();
     database.insertChild(childrenCompanion);
+    } else {
+      database.updateChild(child);
+    }
+   
     _insertStreamController.add(true);
+  }
+
+  Future<ChildModel> getChildById(int id)async {
+     late ChildModel result;
+     try{
+        result = await database.getChildById(id);
+     } catch(e){
+        log(e as num);
+     }
+     return result;
   }
 
   Future<void> deleteAll() async {

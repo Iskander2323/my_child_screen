@@ -5,12 +5,14 @@ import 'package:my_child_screen/create_child/view/child_form.dart';
 import 'package:my_child_screen/repository/children_repository.dart';
 
 class ChildFormPage extends StatelessWidget {
-  const ChildFormPage({super.key});
+  const ChildFormPage({super.key,  this.id});
+
+  final String? id;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) => ChildFormBloc(context.read<ChildrenRepository>()),
+        create: (context) => ChildFormBloc(context.read<ChildrenRepository>())..add(FormChild(id)),
         child: const ChildForm(),
       ),
     );
